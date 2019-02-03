@@ -7,6 +7,7 @@ package model.entities;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import model.exceptions.DomainException;
 
 /**
  *
@@ -14,16 +15,19 @@ import java.util.Date;
  */
 public class Reservation {
     private Integer roomNumber;
-    private Date checkin, checkout;
+    private Date checkIn, checkOut;
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public Reservation() {
     }
 
-    public Reservation(Integer roomNumber, Date checkin, Date checkout) {
+    public Reservation(Integer roomNumber, Date checkIn, Date checkOut) throws DomainException {
+         if (!checkOut.after(checkIn)) {
+            throw new DomainException("Check-out date must be after check-in date");
+        }
         this.roomNumber = roomNumber;
-        this.checkin = checkin;
-        this.checkout = checkout;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
     }
 
     public Integer getRoomNumber() {
@@ -34,25 +38,25 @@ public class Reservation {
         this.roomNumber = roomNumber;
     }
 
-    public Date getCheckin() {
-        return checkin;
+    public Date getCheckIn() {
+        return checkIn;
     }
 
-    public void setCheckin(Date checkin) {
-        this.checkin = checkin;
+    public void setCheckIn(Date checkIn) {
+        this.checkIn = checkIn;
     }
 
-    public Date getCheckout() {
-        return checkout;
+    public Date getCheckOut() {
+        return checkOut;
     }
 
-    public void setCheckout(Date checkout) {
-        this.checkout = checkout;
+    public void setCheckOut(Date checkOut) {
+        this.checkOut = checkOut;
     }
 
     @Override
     public String toString() {
-        return "Reservation{" + "roomNumber=" + roomNumber + ", checkin=" + sdf.format(checkin) + ", checkout=" + sdf.format(checkout) + '}';
+        return "Reservation{" + "roomNumber=" + roomNumber + ", checkin=" + sdf.format(checkIn) + ", checkout=" + sdf.format(checkOut) + '}';
     }
     
     

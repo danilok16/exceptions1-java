@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import model.entities.Reservation;
+import view.entities.MainMenuView;
+import view.entities.ReservationControllerView;
 
 /**
  *
@@ -21,8 +23,26 @@ public class ExercicioAula119 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ParseException {
+        
+        
         Scanner sc = new Scanner(System.in);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+         int resp;
+        MainMenuView mainMenu = new MainMenuView();
+        ReservationControllerView reservationControllerView = new ReservationControllerView();
+        
+         do{
+           mainMenu.mainMenuControllerView();
+           resp = sc.nextInt();
+           switch(resp){
+               case 1: reservationControllerView.reservation();
+               break;
+           }
+            sc.nextLine();
+        }while(resp != 2);
+     
+        
+        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
         System.out.print("Room number: ");
         int number = sc.nextInt();
@@ -56,7 +76,7 @@ public class ExercicioAula119 {
                 //updateDates
             }
         }
-        
+        */
         sc.close();
     }
     
